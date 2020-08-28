@@ -6,7 +6,7 @@ class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [{ task: "Beli keybord" }, { task: "Belajar hooks" }],
+      todos: [],
     };
   }
 
@@ -17,10 +17,21 @@ class TodoList extends React.Component {
     }));
   };
 
-  render() {
-    const todos = this.state.todos.map((todo) => {
-      return <Todo task={todo.task} />;
+  removeTodo = (id) => {
+    this.setState({
+      todos: this.state.todos.filter((todo) => todo.id !== id),
     });
+  };
+
+  render() {
+    const todos = this.state.todos.map((todo) => (
+      <Todo
+        key={todo.id}
+        id={todo.id}
+        task={todo.task}
+        remove={this.removeTodo}
+      />
+    ));
     return (
       <div className="TodoList">
         <h1>Todo List</h1>
