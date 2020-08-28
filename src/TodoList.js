@@ -10,7 +10,7 @@ class TodoList extends React.Component {
     };
   }
 
-  //object state dari form
+  //obj = object state dari form
   createTodo = (obj) => {
     this.setState((st) => ({
       todos: [...st.todos, obj],
@@ -23,6 +23,21 @@ class TodoList extends React.Component {
     });
   };
 
+  editTodo = (id, updatedTask) => {
+    const updatedTodos = this.state.todos.map((todo) => {
+      //iterate each element & returnned as an array
+      if (todo.id === id) {
+        return { ...todo, task: updatedTask };
+      } else {
+        return todo;
+      }
+    });
+
+    this.setState({
+      todos: updatedTodos,
+    });
+  };
+
   render() {
     const todos = this.state.todos.map((todo) => (
       <Todo
@@ -30,6 +45,7 @@ class TodoList extends React.Component {
         id={todo.id}
         task={todo.task}
         remove={this.removeTodo}
+        edit={this.editTodo}
       />
     ));
     return (
