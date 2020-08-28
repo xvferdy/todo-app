@@ -3,14 +3,8 @@ import React from "react";
 import "./App.css";
 
 class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.id,
-    };
-  }
   handleRemove = () => {
-    this.props.remove(this.state.id);
+    this.props.remove(this.props.id);
   };
 
   render() {
