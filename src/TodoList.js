@@ -9,6 +9,14 @@ class TodoList extends React.Component {
       todos: [{ task: "Beli keybord" }, { task: "Belajar hooks" }],
     };
   }
+
+  //object state dari form
+  createTodo = (obj) => {
+    this.setState((st) => ({
+      todos: [...st.todos, obj],
+    }));
+  };
+
   render() {
     const todos = this.state.todos.map((todo) => {
       return <Todo task={todo.task} />;
@@ -16,8 +24,8 @@ class TodoList extends React.Component {
     return (
       <div className="TodoList">
         <h1>Todo List</h1>
+        <NewTodoForm newTodo={this.createTodo} />
         {todos}
-        <NewTodoForm />
       </div>
     );
   }
