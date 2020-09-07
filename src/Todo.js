@@ -20,10 +20,8 @@ class Todo extends React.Component {
     e.preventDefault();
     //take new task and pass up to parent
     this.props.edit(this.props.id, this.state.task);
-
     this.setState({
       isEditing: false,
-      task: "",
     });
   };
 
@@ -45,8 +43,8 @@ class Todo extends React.Component {
     let result;
     if (this.state.isEditing) {
       result = (
-        <div>
-          <form onSubmit={this.handleUpdate}>
+        <div className="Todo">
+          <form className="Todo-edit-form" onSubmit={this.handleUpdate}>
             <input
               type="text"
               value={this.state.task}
@@ -60,14 +58,23 @@ class Todo extends React.Component {
     } else {
       result = (
         <div className="Todo">
-          <button onClick={this.handleEdit}>Edit</button>
-          <button onClick={this.handleRemove}>X</button>
           <li
-            className={this.props.completed ? "completed" : ""}
+            className={
+              this.props.completed ? "Todo-task completed" : "Todo-task"
+            }
             onClick={this.handleToggle}
           >
             {this.props.task}
           </li>
+
+          <div className="Todo-buttons">
+            <button onClick={this.handleEdit}>
+              <i class="fas fa-pen" />
+            </button>
+            <button onClick={this.handleRemove}>
+              <i class="fas fa-trash" />
+            </button>
+          </div>
         </div>
       );
     }
